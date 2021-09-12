@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Uber Rides Prediction</title>
+     <title>Uber Rides Prediction Model</title>
+        <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body>
+    <h1>Uber Rides Prediction</h1>
+    <hr/>
+    <form action="{% url 'test' %}" method="post">
+        {% csrf_token %}
+        Enter Price Per Week:
+        <input type="number" name="ppw"/><br/><br/>
+        Enter Population:
+        <input type="number" name="pn"/><br/><br/>
+        Enter Monthly Income:
+        <input type="number" name="mi"/><br/><br/>
+        Enter Average Parking Per Month:
+        <input type="number" name="appm"/><br/><br/>
+        <input type="submit" value="Predict"/>
+    </form>
+    <h1>List Of Predicted Rides</h1>
+    <hr/>
+    <table border="5">
+        <tr>
+            <th>Price Per Week</th>
+            <th>Population</th>
+            <th>Monthly Income</th>
+            <th>Average Parking Per Month</th>
+            <th>Number Of Predicted Rides</th>
+        </tr>
+        {% for o in obj %}
+            <tr>
+                <td>{{o.ppw}}</td>
+                <td>{{o.pn}}</td>
+                <td>{{o.mi}}</td>
+                <td>{{o.appm}}</td>
+                <td>{{o.res}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
